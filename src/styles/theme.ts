@@ -50,4 +50,4 @@ export default {
     small: pxToRem(5),
     large: pxToRem(20),
   },
-};
+} as const;
