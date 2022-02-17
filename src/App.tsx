@@ -1,5 +1,5 @@
 function App() {
-  return <h1>Kaylinda fernandes</h1>;
+  return <h1>Hello project</h1>;
 }
 
 export default App;
