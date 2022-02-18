@@ -23,7 +23,7 @@ const Header = () => {
 
         <Styled.TeamListButtonWrapper>
           <Styled.TeamListButton>
-            Your Team
+            {isDesktop && <span>Your Team</span>}
             <img src={USER_ICON} />
           </Styled.TeamListButton>
         </Styled.TeamListButtonWrapper>

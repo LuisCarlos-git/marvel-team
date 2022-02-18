@@ -40,23 +40,23 @@ export const TeamListButton = styled.button`
     padding: ${theme.spacings[8]};
     color: ${theme.font.colors.white};
     font-size: ${theme.font.sizes[16]};
-    border-radius: ${theme.radii.large} ${theme.radii.small};
-    width: 14rem;
-    height: 4rem;
+    width: 5rem;
+    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border-radius: 50%;
 
     img {
       width: 2.8rem;
-      margin-left: 1rem;
     }
 
     ${theme.media.min(768)} {
       width: 17.9rem;
       height: 5.9rem;
       font-size: ${theme.font.sizes[24]};
+      border-radius: ${theme.radii.large} ${theme.radii.small};
 
       img {
         width: 3rem;
