@@ -50,4 +50,8 @@ export default {
     small: pxToRem(5),
     large: pxToRem(20),
   },
+
+  media: {
+    min: (value: number) => `@media only screen and (min-width: ${value}px)`,
+  },
 } as const;
