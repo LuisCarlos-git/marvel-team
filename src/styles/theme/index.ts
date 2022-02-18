@@ -1,6 +1,7 @@
 const pxToRem = (value: number) => `${value / 10}rem`;
 
 export default {
+  generalMaxWidth: pxToRem(1300),
   font: {
     family: "'Roboto', sans-serif",
     weight: {

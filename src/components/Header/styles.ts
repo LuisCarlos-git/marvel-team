@@ -12,12 +12,14 @@ export const Wrapper = styled.header`
 `;
 
 export const Content = styled.header`
-  display: flex;
-  justify-content: space-between;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
 
-  max-width: 130rem;
-  width: 100%;
-  margin: 0 auto;
+    max-width: ${theme.generalMaxWidth};
+    width: 100%;
+    margin: 0 auto;
+  `}
 `;
 export const LogoWrapper = styled.div`
   display: flex;
