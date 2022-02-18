@@ -7,3 +7,7 @@ export default {
 } as Meta;
 
 export const Default: Story = () => <Header />;
+
+Default.parameters = {
+  layout: 'fullscreen',
+};
