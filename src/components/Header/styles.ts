@@ -11,7 +11,7 @@ export const Wrapper = styled.header`
   `}
 `;
 
-export const Content = styled.header`
+export const Content = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
