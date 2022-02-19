@@ -50,9 +50,12 @@ export default {
   },
 
   radii: {
-    small: pxToRem(5),
+    xsmall: pxToRem(5),
+    small: pxToRem(10),
     medium: pxToRem(20),
     large: pxToRem(30),
+    xlarge: pxToRem(50),
+    xxlarge: pxToRem(70),
   },
 
   media: {

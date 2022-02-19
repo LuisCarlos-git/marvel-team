@@ -1,7 +1,10 @@
-import type { HTMLAttributes } from 'react';
+import { FontSizes, FontColors } from 'styles/theme/types';
 
 export type HeadingLevels = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-export type HeadingProps = {
+export type StyledHeadingProps = {
   levels?: HeadingLevels;
-} & HTMLAttributes<HTMLHeadingElement>;
+  fontColor?: FontColors;
+  fontSize?: FontSizes;
+  responsiveSize?: FontSizes;
+};
