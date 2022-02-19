@@ -7,3 +7,7 @@ export default {
 } as Meta;
 
 export const Default: Story = () => <SearchHero />;
+
+Default.parameters = {
+  backgrounds: { default: 'dark' },
+};

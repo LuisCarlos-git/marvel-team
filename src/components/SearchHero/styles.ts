@@ -15,7 +15,7 @@ export const TextField = styled.input`
     padding-left: ${theme.spacings[16]};
     padding-right: ${theme.spacings[8]};
     font-size: ${theme.font.sizes[18]};
-    border-bottom-left-radius: ${theme.radii.large};
+    border-bottom-left-radius: ${theme.radii.small};
     border-top-left-radius: ${theme.radii.small};
 
     ${theme.media.min(768)} {
@@ -23,6 +23,8 @@ export const TextField = styled.input`
       font-size: ${theme.font.sizes[24]};
       padding-left: ${theme.spacings[30]};
       padding-right: ${theme.spacings[16]};
+      border-bottom-left-radius: ${theme.radii.medium};
+      border-top-left-radius: ${theme.radii.small};
     }
   `}
 `;
@@ -37,8 +39,9 @@ export const SearchButton = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
     border-bottom-right-radius: ${theme.radii.small};
-    border-top-right-radius: ${theme.radii.large};
+    border-top-right-radius: ${theme.radii.small};
 
     img {
       width: 2rem;
@@ -47,6 +50,8 @@ export const SearchButton = styled.button`
     ${theme.media.min(768)} {
       height: 7rem;
       max-width: 10rem;
+      border-bottom-right-radius: ${theme.radii.small};
+      border-top-right-radius: ${theme.radii.medium};
 
       img {
         width: 2.6rem;

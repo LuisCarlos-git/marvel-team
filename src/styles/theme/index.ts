@@ -15,6 +15,7 @@ export default {
     },
 
     sizes: {
+      12: pxToRem(12),
       16: pxToRem(16),
       18: pxToRem(18),
       20: pxToRem(20),
@@ -40,16 +41,18 @@ export default {
 
   colors: {
     red: '#F43735',
-    redSuperLigthen: '#FFCDD2',
+    redSuperLighthen: '#FFCDD2',
     white: '#ffffff',
     black: '#202020 ',
     shadow: 'rgba(0, 0, 0, 0.25) ',
     gray: '#959595 ',
+    whiteLighthen: '#F5F5F5',
   },
 
   radii: {
     small: pxToRem(5),
-    large: pxToRem(20),
+    medium: pxToRem(20),
+    large: pxToRem(30),
   },
 
   media: {
