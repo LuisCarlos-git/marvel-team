@@ -5,14 +5,14 @@ import Heading from 'components/Heading';
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     width: 100%;
-    border-radius: ${theme.radii.small};
+    border-radius: ${theme.radii.xsmall};
 
     background: ${theme.colors.white};
     overflow: hidden;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     ${theme.media.min(768)} {
-      border-radius: ${theme.radii.small} ${theme.radii.large};
+      border-radius: ${theme.radii.xsmall} ${theme.radii.large};
       max-width: 27rem;
     }
   `}

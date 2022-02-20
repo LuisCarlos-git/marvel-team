@@ -11,6 +11,9 @@
     "generate": "yarn plop --plopfile generators/plopfile.js"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
+    "axios": "^0.26.0",
+    "md5": "^2.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.3"
@@ -23,6 +26,7 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
+    "@types/md5": "^2.3.2",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@types/styled-components": "^5.1.22",
