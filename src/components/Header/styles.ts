@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.header`
@@ -35,7 +36,7 @@ export const TeamListButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const TeamListButton = styled.button`
+export const TeamListButton = styled(Link)`
   ${({ theme }) => css`
     background: ${theme.colors.red};
     border: 0;
@@ -49,6 +50,7 @@ export const TeamListButton = styled.button`
     align-items: center;
     cursor: pointer;
     border-radius: 50%;
+    text-decoration: none;
 
     img {
       width: 2.8rem;

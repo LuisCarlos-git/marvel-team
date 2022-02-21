@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
     ${theme.media.min(768)} {
       border-radius: ${theme.radii.xsmall} ${theme.radii.large};
-      max-width: 27rem;
+      /* max-width: 27rem; */
     }
   `}
 `;

@@ -1,19 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './../store';
-import { fetchCharacters } from 'store/actions/charactersActions';
-import { CharactersState, Status } from '../types/charactersTypes';
+import {
+  fetchCharacters,
+  fetchCharactersByName,
+} from 'store/actions/charactersActions';
+import { CharactersState, Favorite, Status } from '../types/charactersTypes';
 
 const REDUCER_NAME = 'characters';
 
 const initialState = {
   characters: [],
+  favorites: [],
   status: Status.IDLE,
+  searchCharacters: [],
+  searchStatus: Status.IDLE,
 } as CharactersState;
 
 const characterSlice = createSlice({
   name: REDUCER_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    addFavorite: (state, action: PayloadAction<Favorite>) => {
+      state.favorites.push(action.payload);
+    },
+    removeFavorites: (state, action: PayloadAction<{ id: number }>) => {
+      state.favorites = state.favorites.filter(
+        item => item.id !== action.payload.id
+      );
+    },
+
+    clearSearchIfNameByEmpty: state => {
+      state.searchCharacters = [];
+    },
+  },
 
   extraReducers: builder => {
     builder
@@ -24,13 +43,17 @@ const characterSlice = createSlice({
         state.characters = action.payload.data.results;
         state.status = Status.SUCCEEDED;
       });
+
+    builder
+      .addCase(fetchCharactersByName.pending, state => {
+        state.searchStatus = Status.PENDING;
+      })
+      .addCase(fetchCharactersByName.fulfilled, (state, action) => {
+        state.searchCharacters = action.payload.data.results;
+      });
   },
 });
 
-export const statusSelector = (state: RootState) =>
-  state.characterReducer.status;
-
-export const characterSelector = (state: RootState) =>
-  state.characterReducer.characters;
+export const noAsyncActions = characterSlice.actions;
 
 export default characterSlice.reducer;

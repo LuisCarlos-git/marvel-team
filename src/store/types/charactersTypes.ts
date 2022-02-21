@@ -6,11 +6,21 @@ export enum Status {
 }
 
 export type CharactersState = {
-  characters: Characters[];
+  characters: Character[];
+  favorites: Favorite[];
   status: Status;
+  searchStatus: Status;
+  searchCharacters: Character[];
 };
 
-type Characters = {
+export type Favorite = {
+  id: number;
+  heroName: string;
+  description: string;
+  image: string;
+};
+
+type Character = {
   id: number;
   name: string;
   description: string;

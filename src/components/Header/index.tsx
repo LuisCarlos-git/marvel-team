@@ -22,7 +22,7 @@ const Header = () => {
         </Styled.LogoWrapper>
 
         <Styled.TeamListButtonWrapper>
-          <Styled.TeamListButton>
+          <Styled.TeamListButton to="/favorites">
             {isDesktop && <span>Your Team</span>}
             <img src={USER_ICON} />
           </Styled.TeamListButton>
