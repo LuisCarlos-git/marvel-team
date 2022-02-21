@@ -19,7 +19,6 @@ export const fetchCharactersByName = createAsyncThunk(
   Actions.FETCH_CHARACTER_BY_NAME,
   async ({ heroName }: { heroName: string }) => {
     const response = await services.getSearchCharacters(heroName);
-    console.log(response);
     return response;
   }
 );
