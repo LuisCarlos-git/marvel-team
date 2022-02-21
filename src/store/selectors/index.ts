@@ -1,7 +1,7 @@
 import { RootState } from 'store/store';
 
 export const statusSelector = (state: RootState) =>
-  state.characterReducer.status;
+  state.characterReducer.getCharactersStatus;
 
 export const characterSelector = (state: RootState) =>
   state.characterReducer.characters;
