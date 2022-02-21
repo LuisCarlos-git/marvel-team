@@ -4,7 +4,7 @@ import { noAsyncActions } from 'store/reducers/chractersSlice';
 
 enum Actions {
   FETCH_CHARACTERS = '@characters/FETCH_CHARACTERS',
-  FETCH_CHARACTER_BY_NAME = '@characters/FETCH_CHARACTER_BY_NAME',
+  FETCH_CHARACTERS_BY_NAME = '@characters/FETCH_CHARACTERS_BY_NAME',
 }
 
 export const fetchCharacters = createAsyncThunk(
@@ -16,7 +16,7 @@ export const fetchCharacters = createAsyncThunk(
 );
 
 export const fetchCharactersByName = createAsyncThunk(
-  Actions.FETCH_CHARACTER_BY_NAME,
+  Actions.FETCH_CHARACTERS_BY_NAME,
   async ({ heroName }: { heroName: string }) => {
     const response = await services.getSearchCharacters(heroName);
     return response;
