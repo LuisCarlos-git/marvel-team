@@ -10,7 +10,7 @@ const REDUCER_NAME = 'characters';
 const initialState = {
   characters: [],
   favorites: [],
-  status: Status.IDLE,
+  getCharactersStatus: Status.IDLE,
   searchCharacters: [],
   searchStatus: Status.IDLE,
 } as CharactersState;
@@ -36,11 +36,11 @@ const characterSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchCharacters.pending, state => {
-        state.status = Status.PENDING;
+        state.getCharactersStatus = Status.PENDING;
       })
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         state.characters = action.payload.data.results;
-        state.status = Status.SUCCEEDED;
+        state.getCharactersStatus = Status.SUCCEEDED;
       });
 
     builder

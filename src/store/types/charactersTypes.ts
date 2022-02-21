@@ -8,7 +8,7 @@ export enum Status {
 export type CharactersState = {
   characters: Character[];
   favorites: Favorite[];
-  status: Status;
+  getCharactersStatus: Status;
   searchStatus: Status;
   searchCharacters: Character[];
 };
