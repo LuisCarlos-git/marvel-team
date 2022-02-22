@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Header from 'components/Header';
@@ -14,6 +14,8 @@ import {
 
 import * as Styled from './styles';
 import { InformativeCard } from 'components/Cards';
+import Paginate from 'components/Paginate';
+import { useCallback } from 'react';
 
 export const Details = () => {
   const params = useParams();
@@ -24,8 +26,24 @@ export const Details = () => {
 
   useEffect(() => {
     dispatch(fetchCharactersById(params.heroId!));
-    dispatch(fetchCharactersComics(params.heroId!));
+    dispatch(
+      fetchCharactersComics({
+        heroId: params.heroId!,
+      })
+    );
   }, [dispatch, params.heroId]);
+
+  const getNewComics = useCallback(
+    (offset: number) => {
+      dispatch(
+        fetchCharactersComics({
+          heroId: params.heroId!,
+          offset,
+        })
+      );
+    },
+    [dispatch, params.heroId]
+  );
 
   return (
     <>
@@ -54,26 +72,39 @@ export const Details = () => {
         </Styled.InfoHeroCardWrapper>
 
         <Styled.ContentHeader>
-          <Heading>Characters</Heading>
+          <Heading>Comics</Heading>
           <Heading levels="h3" fontSize={24} responsiveSize={20}>
             # results
           </Heading>
         </Styled.ContentHeader>
 
         <Styled.ComicsWrapper>
-          {comics.map(comic => (
-            <InformativeCard
-              variant="fullInformations"
-              key={comic.id}
-              title={comic.title}
-              image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-              description={comic.description}
-              price={comic.prices[0].price}
-              comicsPageQuantity={comic.pageCount}
-              comicsLaunchDate={comic.dates[0].date}
-            />
-          ))}
+          {comics.results ? (
+            comics.results.map(comic => (
+              <InformativeCard
+                variant="fullInformations"
+                key={comic.id}
+                title={comic.title}
+                image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                description={comic.description}
+                price={comic.prices[0].price}
+                comicsPageQuantity={comic.pageCount}
+                comicsLaunchDate={comic.dates[0].date}
+              />
+            ))
+          ) : (
+            <p>Comics not found</p>
+          )}
         </Styled.ComicsWrapper>
+
+        <Styled.PaginationWrapper>
+          <Paginate
+            limit={comics.limit}
+            offset={comics.offset}
+            total={comics.total}
+            updateOffset={getNewComics}
+          />
+        </Styled.PaginationWrapper>
       </Styled.Banner>
       <Footer />
     </>

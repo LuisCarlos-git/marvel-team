@@ -60,3 +60,16 @@ export const Banner = styled.div`
     }
   `}
 `;
+
+export const PaginationWrapper = styled.div`
+  ${({ theme }) => css`
+    padding: 0 ${theme.spacings[16]};
+    max-width: ${theme.generalMaxWidth};
+    display: flex;
+    justify-content: flex-end;
+    margin: 5rem auto 2rem;
+    ${theme.media.min(768)} {
+      padding: 0 0;
+    }
+  `}
+`;

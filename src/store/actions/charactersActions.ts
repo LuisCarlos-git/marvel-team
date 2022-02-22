@@ -11,8 +11,9 @@ enum Actions {
 
 export const fetchCharacters = createAsyncThunk(
   Actions.FETCH_CHARACTERS,
-  async () => {
-    const response = await services.getCharacters();
+  async (offset?: number) => {
+    const hasOffset = offset ? offset : 0;
+    const response = await services.getCharacters({ offset: hasOffset });
     return response;
   }
 );
@@ -35,8 +36,8 @@ export const fetchCharactersById = createAsyncThunk(
 
 export const fetchCharactersComics = createAsyncThunk(
   Actions.FETCH_CHARACTERS_COMICS,
-  async (heroId: string) => {
-    const response = await services.getCharacterComics(heroId);
+  async ({ heroId, offset = 0 }: { heroId: string; offset?: number }) => {
+    const response = await services.getCharacterComics({ heroId, offset });
     return response;
   }
 );

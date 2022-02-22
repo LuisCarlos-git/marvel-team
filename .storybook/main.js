@@ -12,6 +12,11 @@ module.exports = {
 
   webpackFinal: config => {
     config.resolve.modules.push(`${process.cwd()}/src`);
+    config.module.rules.push({
+      test: /\.ts$/,
+      loader: require.resolve('@open-wc/webpack-import-meta-loader'),
+    });
+
     return config;
   },
 };

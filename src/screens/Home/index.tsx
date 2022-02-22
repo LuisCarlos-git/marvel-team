@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import Footer from 'components/Footer';
 import Header from 'components/Header';
@@ -21,6 +21,7 @@ import {
 } from 'store/selectors';
 
 import * as Styled from './styles';
+import Paginate from 'components/Paginate';
 
 export const Home = () => {
   const characters = useAppSelector(characterSelector);
@@ -31,6 +32,15 @@ export const Home = () => {
   useEffect(() => {
     dispatch(fetchCharacters());
   }, [dispatch]);
+
+  console.log(characters);
+
+  const newCharacters = useCallback(
+    (offset: number) => {
+      dispatch(fetchCharacters(offset));
+    },
+    [dispatch]
+  );
 
   return (
     <>
@@ -51,8 +61,8 @@ export const Home = () => {
           </Heading>
         </Styled.ContentHeader>
         <Styled.HeroList>
-          {!searchResults.length
-            ? characters.map(hero => (
+          {!searchResults.length && characters.results
+            ? characters.results.map(hero => (
                 <HeroCardSimple
                   key={hero.id}
                   heroId={hero.id}
@@ -81,6 +91,16 @@ export const Home = () => {
                 />
               ))}
         </Styled.HeroList>
+        {!searchResults.length && (
+          <Styled.PaginationWrapper>
+            <Paginate
+              limit={characters.limit}
+              offset={characters.offset}
+              total={characters.total}
+              updateOffset={newCharacters}
+            />
+          </Styled.PaginationWrapper>
+        )}
       </Styled.Content>
       <Footer />
     </>

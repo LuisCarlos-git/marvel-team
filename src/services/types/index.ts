@@ -293,3 +293,8 @@ export type GetCharacterComicsResponse = {
   };
   etag: string;
 };
+
+export type GetCharacterComicsProps = {
+  heroId: string;
+  offset?: number;
+};

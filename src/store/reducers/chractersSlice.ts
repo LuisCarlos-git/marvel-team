@@ -6,23 +6,24 @@ import {
   fetchCharactersComics,
 } from 'store/actions/charactersActions';
 import {
+  Character,
   CharactersState,
+  Comics,
   Favorite,
   Status,
-  CharacterById,
 } from '../types/charactersTypes';
 
 const REDUCER_NAME = 'characters';
 
 const initialState = {
-  characters: [],
+  characters: {} as Character,
   favorites: [],
   getCharactersStatus: Status.IDLE,
   searchCharacters: [],
   searchStatus: Status.IDLE,
   characterById: [],
   characterByIdStatus: Status.IDLE,
-  comics: [],
+  comics: {} as Comics,
   comicsStatus: Status.IDLE,
 } as CharactersState;
 
@@ -50,7 +51,7 @@ const characterSlice = createSlice({
         state.getCharactersStatus = Status.PENDING;
       })
       .addCase(fetchCharacters.fulfilled, (state, action) => {
-        state.characters = action.payload.data.results;
+        state.characters = action.payload.data;
         state.getCharactersStatus = Status.SUCCEEDED;
       });
 
@@ -75,7 +76,7 @@ const characterSlice = createSlice({
         state.comicsStatus = Status.PENDING;
       })
       .addCase(fetchCharactersComics.fulfilled, (state, action) => {
-        state.comics = action.payload.data.results;
+        state.comics = action.payload.data;
       });
   },
 });
