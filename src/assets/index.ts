@@ -4,3 +4,4 @@ export { default as SEARCH_ICON } from './search.svg';
 export { default as FAVORITE_ICON } from './favorite.svg';
 export { default as FAVORITE_WHITE_ICON } from './favorite_white.svg';
 export { default as BANNER } from './banner.svg';
+export { default as LOADING } from './loading.json';

@@ -30,21 +30,27 @@ export const Favorite = () => {
           </Heading>
         </Styled.BannerContent>
         <Styled.Content>
-          <Styled.HeroList>
-            {favorites.map(hero => (
-              <HeroCardSimple
-                key={hero.id}
-                heroId={hero.id}
-                heroName={hero.heroName}
-                description={hero.description}
-                image={hero.image}
-                isFavorite={!!favorites.find(item => item.id === hero.id)}
-                onFavRemove={heroId =>
-                  dispatch(removeFavorites({ id: heroId }))
-                }
-              />
-            ))}
-          </Styled.HeroList>
+          {!favorites.length ? (
+            <Styled.DontFav>
+              <Heading>You don&apos;t have favorites</Heading>
+            </Styled.DontFav>
+          ) : (
+            <Styled.HeroList>
+              {favorites.map(hero => (
+                <HeroCardSimple
+                  key={hero.id}
+                  heroId={hero.id}
+                  heroName={hero.heroName}
+                  description={hero.description}
+                  image={hero.image}
+                  isFavorite={!!favorites.find(item => item.id === hero.id)}
+                  onFavRemove={heroId =>
+                    dispatch(removeFavorites({ id: heroId }))
+                  }
+                />
+              ))}
+            </Styled.HeroList>
+          )}
         </Styled.Content>
       </Styled.Banner>
       <Footer />

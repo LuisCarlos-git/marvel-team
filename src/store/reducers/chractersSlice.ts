@@ -77,6 +77,10 @@ const characterSlice = createSlice({
       })
       .addCase(fetchCharactersComics.fulfilled, (state, action) => {
         state.comics = action.payload.data;
+        state.comicsStatus = Status.SUCCEEDED;
+      })
+      .addCase(fetchCharactersComics.rejected, state => {
+        state.comicsStatus = Status.FAILED;
       });
   },
 });

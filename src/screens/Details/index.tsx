@@ -5,7 +5,11 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Heading from 'components/Heading';
 
-import { characterByIdSelector, comicsSelector } from 'store/selectors';
+import {
+  characterByIdSelector,
+  comicsSelector,
+  comicsStatusSelector,
+} from 'store/selectors';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
   fetchCharactersById,
@@ -16,6 +20,7 @@ import * as Styled from './styles';
 import { InformativeCard } from 'components/Cards';
 import Paginate from 'components/Paginate';
 import { useCallback } from 'react';
+import Loading from 'components/Loading';
 
 export const Details = () => {
   const params = useParams();
@@ -23,6 +28,7 @@ export const Details = () => {
   const dispatch = useAppDispatch();
   const hero = useAppSelector(characterByIdSelector);
   const comics = useAppSelector(comicsSelector);
+  const comicsStatus = useAppSelector(comicsStatusSelector);
 
   useEffect(() => {
     dispatch(fetchCharactersById(params.heroId!));
@@ -71,40 +77,49 @@ export const Details = () => {
             ))}
         </Styled.InfoHeroCardWrapper>
 
-        <Styled.ContentHeader>
-          <Heading>Comics</Heading>
-          <Heading levels="h3" fontSize={24} responsiveSize={20}>
-            # results
-          </Heading>
-        </Styled.ContentHeader>
+        {comicsStatus === 'pending' ? (
+          <Loading />
+        ) : (
+          <>
+            {!comics.results ? (
+              <Styled.DontFav>
+                <Heading>Comics not found</Heading>
+              </Styled.DontFav>
+            ) : (
+              <Styled.ContentHeader>
+                <Heading>Comics</Heading>
+                <Heading levels="h3" fontSize={24} responsiveSize={20}>
+                  # results
+                </Heading>
+              </Styled.ContentHeader>
+            )}
 
-        <Styled.ComicsWrapper>
-          {comics.results ? (
-            comics.results.map(comic => (
-              <InformativeCard
-                variant="fullInformations"
-                key={comic.id}
-                title={comic.title}
-                image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                description={comic.description}
-                price={comic.prices[0].price}
-                comicsPageQuantity={comic.pageCount}
-                comicsLaunchDate={comic.dates[0].date}
+            <Styled.ComicsWrapper>
+              {comics.results &&
+                comics.results.map(comic => (
+                  <InformativeCard
+                    variant="fullInformations"
+                    key={comic.id}
+                    title={comic.title}
+                    image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                    description={comic.description}
+                    price={comic.prices[0].price}
+                    comicsPageQuantity={comic.pageCount}
+                    comicsLaunchDate={comic.dates[0].date}
+                  />
+                ))}
+            </Styled.ComicsWrapper>
+
+            <Styled.PaginationWrapper>
+              <Paginate
+                limit={comics.limit}
+                offset={comics.offset}
+                total={comics.total}
+                updateOffset={getNewComics}
               />
-            ))
-          ) : (
-            <p>Comics not found</p>
-          )}
-        </Styled.ComicsWrapper>
-
-        <Styled.PaginationWrapper>
-          <Paginate
-            limit={comics.limit}
-            offset={comics.offset}
-            total={comics.total}
-            updateOffset={getNewComics}
-          />
-        </Styled.PaginationWrapper>
+            </Styled.PaginationWrapper>
+          </>
+        )}
       </Styled.Banner>
       <Footer />
     </>

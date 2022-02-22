@@ -57,3 +57,16 @@ export const PaginationWrapper = styled.div`
     }
   `}
 `;
+
+export const DontFav = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    background: white;
+    border-radius: ${theme.radii.small};
+    padding: ${theme.spacings[16]};
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `}
+`;

@@ -1,6 +1,6 @@
 import { RootState } from 'store/store';
 
-export const statusSelector = (state: RootState) =>
+export const charactersStatusSelector = (state: RootState) =>
   state.characterReducer.getCharactersStatus;
 
 export const characterSelector = (state: RootState) =>
@@ -17,3 +17,6 @@ export const characterByIdSelector = (state: RootState) =>
 
 export const comicsSelector = (state: RootState) =>
   state.characterReducer.comics;
+
+export const comicsStatusSelector = (state: RootState) =>
+  state.characterReducer.comicsStatus;
