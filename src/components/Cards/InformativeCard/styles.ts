@@ -21,6 +21,7 @@ const wrapperModfiers = {
 
 const imageWrapperModfiers = {
   fullInformations: (theme: DefaultTheme) => css`
+    max-height: 26rem;
     ${theme.media.min(768)} {
       margin-right: 4rem;
       width: 24.8rem;

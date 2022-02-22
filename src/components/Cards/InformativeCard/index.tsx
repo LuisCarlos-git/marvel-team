@@ -1,16 +1,18 @@
 import Heading from 'components/Heading';
 import { formatCurrencyUSD } from 'utils/formatCurrencyUSD';
+import { formatDate } from 'utils/formatDate';
 import * as Styled from './styles';
 import { InformativeCardProps } from './types';
 
 const InformativeCard = ({
-  image,
-  heroName,
-  description,
+  image = '',
+  heroName = '',
+  description = '',
   variant = 'minimal',
   comicsLaunchDate,
   comicsPageQuantity,
   price,
+  title,
 }: InformativeCardProps) => (
   <Styled.Wrapper variant={variant}>
     <Styled.ImageWrapper variant={variant} src={image} />
@@ -19,12 +21,14 @@ const InformativeCard = ({
         fontSize={variant === 'fullInformations' ? 30 : 42}
         responsiveSize={variant === 'fullInformations' ? 30 : 32}
       >
-        {heroName}
+        {heroName || title}
       </Heading>
       {variant === 'fullInformations' && (
         <Styled.ComicsInfo>
           {comicsLaunchDate && (
-            <Styled.ComicsItem>{comicsLaunchDate}</Styled.ComicsItem>
+            <Styled.ComicsItem>
+              {formatDate(comicsLaunchDate)}
+            </Styled.ComicsItem>
           )}
           {comicsPageQuantity && (
             <Styled.ComicsItem>{comicsPageQuantity} pages</Styled.ComicsItem>

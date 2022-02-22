@@ -1,9 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   fetchCharacters,
+  fetchCharactersById,
   fetchCharactersByName,
+  fetchCharactersComics,
 } from 'store/actions/charactersActions';
-import { CharactersState, Favorite, Status } from '../types/charactersTypes';
+import {
+  CharactersState,
+  Favorite,
+  Status,
+  CharacterById,
+} from '../types/charactersTypes';
 
 const REDUCER_NAME = 'characters';
 
@@ -13,6 +20,10 @@ const initialState = {
   getCharactersStatus: Status.IDLE,
   searchCharacters: [],
   searchStatus: Status.IDLE,
+  characterById: [],
+  characterByIdStatus: Status.IDLE,
+  comics: [],
+  comicsStatus: Status.IDLE,
 } as CharactersState;
 
 const characterSlice = createSlice({
@@ -49,6 +60,22 @@ const characterSlice = createSlice({
       })
       .addCase(fetchCharactersByName.fulfilled, (state, action) => {
         state.searchCharacters = action.payload.data.results;
+      });
+
+    builder
+      .addCase(fetchCharactersById.pending, state => {
+        state.characterByIdStatus = Status.PENDING;
+      })
+      .addCase(fetchCharactersById.fulfilled, (state, action) => {
+        state.characterById = action.payload.data.results;
+      });
+
+    builder
+      .addCase(fetchCharactersComics.pending, state => {
+        state.comicsStatus = Status.PENDING;
+      })
+      .addCase(fetchCharactersComics.fulfilled, (state, action) => {
+        state.comics = action.payload.data.results;
       });
   },
 });

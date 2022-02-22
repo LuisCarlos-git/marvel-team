@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   ${({ theme }) => css`
     width: 100%;
     border-radius: ${theme.radii.xsmall};
+    cursor: pointer;
 
     background: ${theme.colors.white};
     overflow: hidden;
@@ -13,7 +14,6 @@ export const Wrapper = styled.div`
 
     ${theme.media.min(768)} {
       border-radius: ${theme.radii.xsmall} ${theme.radii.large};
-      /* max-width: 27rem; */
     }
   `}
 `;
@@ -37,6 +37,7 @@ export const InformationsContent = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacings[16]} ${theme.spacings[24]} ${theme.spacings[30]};
     position: relative;
+    z-index: 1;
   `}
 `;
 export const HeroDescription = styled.p`
@@ -65,6 +66,7 @@ export const FavButton = styled.button<StyledFavButtonProps>`
     background: ${isFavorite ? theme.colors.red : theme.colors.whiteLighthen};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
+    z-index: 99999;
 
     img {
       color: ${theme.colors.black};

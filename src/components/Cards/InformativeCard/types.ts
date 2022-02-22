@@ -1,13 +1,14 @@
 type Variants = 'minimal' | 'fullInformations';
 
 export type InformativeCardProps = {
-  image: string;
-  heroName: string;
-  description: string;
+  image?: string;
+  heroName?: string;
+  description?: string;
   variant?: Variants;
-  comicsPageQuantity: number;
-  comicsLaunchDate: string;
-  price: number;
+  comicsPageQuantity?: number;
+  comicsLaunchDate?: Date;
+  price?: number;
+  title?: string;
 };
 
 export type StyledWithVariant = {

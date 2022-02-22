@@ -11,3 +11,9 @@ export const favoriteSelector = (state: RootState) =>
 
 export const searchCharactersSelector = (state: RootState) =>
   state.characterReducer.searchCharacters;
+
+export const characterByIdSelector = (state: RootState) =>
+  state.characterReducer.characterById;
+
+export const comicsSelector = (state: RootState) =>
+  state.characterReducer.comics;
