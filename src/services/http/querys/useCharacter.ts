@@ -7,7 +7,7 @@ export const useGetCharacters = (offset: number) => {
     async () => await charactersSrvices.getCharacters({ offset }),
     {
       refetchOnWindowFocus: false,
-      staleTime: 60 * 60 * 60 * 3,
+      staleTime: 60 * 60 * 1000,
       suspense: true,
     }
   );
