@@ -1,9 +1,10 @@
+import { Suspense, useEffect } from 'react';
 import { Route, RouteProps, Routes, useLocation } from 'react-router-dom';
 
 import { Home } from 'screens/Home';
 import { Details } from 'screens/Details';
 import { Favorite } from 'screens/Favorites';
-import { useEffect } from 'react';
+import Loading from 'components/Loading';
 
 type RoutesObject = {
   routename: string;
@@ -35,14 +36,16 @@ export const AppRoutes = () => {
   }, [pathname]);
 
   return (
-    <Routes>
-      {routes.map(route => (
-        <Route
-          key={route.routename}
-          path={route.path}
-          element={route.element}
-        />
-      ))}
-    </Routes>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        {routes.map(route => (
+          <Route
+            key={route.routename}
+            path={route.path}
+            element={route.element}
+          />
+        ))}
+      </Routes>
+    </Suspense>
   );
 };
