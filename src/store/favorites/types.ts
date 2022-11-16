@@ -7,6 +7,6 @@ type FavoriteCharacter = {
 
 export type FavoritesState = {
   favorites: FavoriteCharacter[];
-  addFavorites: (hero: FavoriteCharacter) => void;
+  addFavorite: (hero: FavoriteCharacter) => void;
   removeFavorite: (id: number) => void;
 };
