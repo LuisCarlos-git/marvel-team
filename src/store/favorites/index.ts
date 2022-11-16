@@ -3,7 +3,7 @@ import { FavoritesState } from './types';
 
 export const useFavorites = create<FavoritesState>((set, get) => ({
   favorites: [],
-  addFavorites: hero => {
+  addFavorite: hero => {
     const { favorites } = get();
     if (favorites.includes(hero)) return;
     set(state => ({ favorites: [...state.favorites, hero] }));
