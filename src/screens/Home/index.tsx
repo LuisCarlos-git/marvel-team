@@ -6,10 +6,18 @@ import { HeroCardSimple } from 'components/Cards';
 
 import * as Styled from './styles';
 
-import { useHome } from './useHome';
+import { useHomeScreen } from './useHomeScreen';
 
 export const Home = () => {
-  const { characters, addFavorites, removeFavorites, favorites } = useHome();
+  const {
+    characters,
+    addFavorites,
+    removeFavorites,
+    isFavoriteHero,
+    searchResult,
+    handleChangeSearchCharacter,
+    characterName,
+  } = useHomeScreen();
 
   return (
     <>
@@ -19,7 +27,10 @@ export const Home = () => {
           <Heading fontColor="white" responsiveSize={32}>
             Explore the most powerful <br /> characters in Marvel
           </Heading>
-          <SearchHero />
+          <SearchHero
+            onInputChange={handleChangeSearchCharacter}
+            initialValue={characterName}
+          />
         </Styled.BannerContent>
       </Styled.Banner>
       <Styled.Content>
@@ -27,20 +38,37 @@ export const Home = () => {
           <Heading>Characters</Heading>
           <Heading levels="h3"># results</Heading>
         </Styled.ContentHeader>
-        <Styled.HeroList>
-          {characters.map(hero => (
-            <HeroCardSimple
-              key={hero.id}
-              heroId={hero.id}
-              heroName={hero.name}
-              description={hero.description}
-              image={hero.thumbnail}
-              onFav={hero => addFavorites(hero)}
-              onFavRemove={removeFavorites}
-              isFavorite={!!favorites.find(fav => fav.id === hero.id)}
-            />
-          ))}
-        </Styled.HeroList>
+        {!searchResult.length ? (
+          <Styled.HeroList>
+            {characters.map(hero => (
+              <HeroCardSimple
+                key={hero.id}
+                heroId={hero.id}
+                heroName={hero.name}
+                description={hero.description}
+                image={hero.thumbnail}
+                onFav={hero => addFavorites(hero)}
+                onFavRemove={removeFavorites}
+                isFavorite={isFavoriteHero(hero.id)}
+              />
+            ))}
+          </Styled.HeroList>
+        ) : (
+          <Styled.HeroList>
+            {searchResult.map(hero => (
+              <HeroCardSimple
+                key={hero.id}
+                heroId={hero.id}
+                heroName={hero.name}
+                description={hero.description}
+                image={hero.thumbnail}
+                onFav={hero => addFavorites(hero)}
+                onFavRemove={removeFavorites}
+                isFavorite={isFavoriteHero(hero.id)}
+              />
+            ))}
+          </Styled.HeroList>
+        )}
       </Styled.Content>
       <Footer />
     </>

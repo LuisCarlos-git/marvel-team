@@ -30,7 +30,7 @@ const getSearchCharacters = async (heroName: string) => {
     },
   });
 
-  return response.data;
+  return characterMapper.toDomain(response.data);
 };
 
 const getCharacterById = async (heroId: string) => {

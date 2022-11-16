@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { queryClient } from 'services/queryClient';
+import { queryClient } from 'services/http/queryClient';
 
 import App from './App';
 import theme from 'styles/theme';
