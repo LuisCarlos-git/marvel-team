@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { charactersSrvices } from '../http/services';
 
 export const useGetCharacters = (offset: number) => {
-  const { data, isError, isFetching } = useQuery(
+  const query = useQuery(
     ['characters', offset],
     async () => await charactersSrvices.getCharacters({ offset }),
     {
@@ -13,8 +13,8 @@ export const useGetCharacters = (offset: number) => {
   );
 
   return {
-    charactersFetchResult: data,
-    charactersFetchIsError: isError,
-    charactersFetchIsFetching: isFetching,
+    charactersData: query.data,
+    charactersIsError: query.isError,
+    charactersIsFetching: query.isFetching,
   };
 };

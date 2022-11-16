@@ -30,7 +30,7 @@ export const useHomeScreen = () => {
   const setCharacterName = useSearchHero(setCharacterNameSelector);
 
   const characters = useCharacters(charactersSelector);
-  const updateCharacter = useCharacters(updateCharactersSelector);
+  const updateCharacters = useCharacters(updateCharactersSelector);
 
   const addFavorite = useFavorites(addFavoriteSelector);
   const removeFavorite = useFavorites(removeFavoriteSelector);
@@ -42,11 +42,8 @@ export const useHomeScreen = () => {
 
   const debouncedValue = useDebounce(characterName);
 
-  const {
-    charactersFetchIsError,
-    charactersFetchIsFetching,
-    charactersFetchResult,
-  } = useGetCharacters(0);
+  const { charactersData, charactersIsError, charactersIsFetching } =
+    useGetCharacters(0);
 
   const {
     searchCharacterData,
@@ -66,18 +63,14 @@ export const useHomeScreen = () => {
   );
 
   useEffect(() => {
-    if (
-      charactersFetchResult &&
-      !charactersFetchIsError &&
-      !charactersFetchIsFetching
-    ) {
-      updateCharacter(charactersFetchResult.characters);
+    if (charactersData && !charactersIsError && !charactersIsFetching) {
+      updateCharacters(charactersData.characters);
     }
   }, [
-    charactersFetchIsError,
-    charactersFetchIsFetching,
-    charactersFetchResult,
-    updateCharacter,
+    charactersData,
+    charactersIsError,
+    charactersIsFetching,
+    updateCharacters,
   ]);
 
   useEffect(() => {
