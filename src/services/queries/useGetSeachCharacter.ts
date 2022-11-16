@@ -3,7 +3,7 @@ import { charactersSrvices } from '../http/services';
 
 export const useGetSeachCharacter = (characterName: string) => {
   const isEnabledQuery = characterName.length > 0;
-  return useQuery(
+  const query = useQuery(
     ['characters', { characterName }],
     async () => await charactersSrvices.getSearchCharacters(characterName),
     {
@@ -12,4 +12,10 @@ export const useGetSeachCharacter = (characterName: string) => {
       enabled: isEnabledQuery,
     }
   );
+
+  return {
+    searchCharacterData: query.data,
+    searchCharacterIsError: query.isError,
+    searchCharacterIsFetching: query.isFetching,
+  };
 };

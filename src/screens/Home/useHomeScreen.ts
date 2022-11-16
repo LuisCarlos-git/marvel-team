@@ -28,6 +28,18 @@ import { useDebounce } from 'hooks';
 export const useHomeScreen = () => {
   const characterName = useSearchHero(characterNameSelector);
   const setCharacterName = useSearchHero(setCharacterNameSelector);
+
+  const characters = useCharacters(charactersSelector);
+  const updateCharacter = useCharacters(updateCharactersSelector);
+
+  const addFavorite = useFavorites(addFavoriteSelector);
+  const removeFavorite = useFavorites(removeFavoriteSelector);
+  const favorites = useFavorites(favoritesSelector);
+
+  const updateSearchCharacters = useSearchHero(updateSearchCharactersSelector);
+  const searchResult = useSearchHero(searchResultsSelector);
+  const resetSearchResults = useSearchHero(resetSearchResultsSelector);
+
   const debouncedValue = useDebounce(characterName);
 
   const {
@@ -37,21 +49,10 @@ export const useHomeScreen = () => {
   } = useGetCharacters(0);
 
   const {
-    data: searchResultData,
-    isError: searchIsError,
-    isFetching: searchIsFetching,
+    searchCharacterData,
+    searchCharacterIsError,
+    searchCharacterIsFetching,
   } = useGetSeachCharacter(debouncedValue);
-
-  const characters = useCharacters(charactersSelector);
-  const updateCharacter = useCharacters(updateCharactersSelector);
-
-  const addFavorites = useFavorites(addFavoriteSelector);
-  const removeFavorites = useFavorites(removeFavoriteSelector);
-  const favorites = useFavorites(favoritesSelector);
-
-  const updateSearchCharacters = useSearchHero(updateSearchCharactersSelector);
-  const searchResult = useSearchHero(searchResultsSelector);
-  const resetSearchResults = useSearchHero(resetSearchResultsSelector);
 
   const handleChangeSearchCharacter = useCallback(
     characterName => {
@@ -80,13 +81,17 @@ export const useHomeScreen = () => {
   ]);
 
   useEffect(() => {
-    if (searchResultData && !searchIsError && !searchIsFetching) {
-      updateSearchCharacters(searchResultData.characters);
+    if (
+      searchCharacterData &&
+      !searchCharacterIsError &&
+      !searchCharacterIsFetching
+    ) {
+      updateSearchCharacters(searchCharacterData.characters);
     }
   }, [
-    searchIsError,
-    searchIsFetching,
-    searchResultData,
+    searchCharacterData,
+    searchCharacterIsError,
+    searchCharacterIsFetching,
     updateSearchCharacters,
   ]);
 
@@ -99,8 +104,8 @@ export const useHomeScreen = () => {
 
   return {
     characters,
-    addFavorites,
-    removeFavorites,
+    addFavorite,
+    removeFavorite,
     isFavoriteHero,
     handleChangeSearchCharacter,
     searchResult,
