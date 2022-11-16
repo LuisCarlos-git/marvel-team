@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Heading from 'components/Heading';
+import { InformativeCard } from 'components/Cards';
+
+import { useDetailsScreen } from './useDetailsScreen';
 
 import * as Styled from './styles';
-import { InformativeCard } from 'components/Cards';
 
 export const Details = () => {
   const navigate = useNavigate();
+  const { characterByIdData } = useDetailsScreen();
 
   return (
     <>
@@ -24,13 +27,16 @@ export const Details = () => {
         </Styled.BannerContent>
 
         <Styled.InfoHeroCardWrapper>
-          <InformativeCard
-            variant="minimal"
-            heroName="miranha"
-            image="image"
-            description="{heroItem.description}"
-            key="{heroItem.id}"
-          />
+          {characterByIdData &&
+            characterByIdData.character.map(heroItem => (
+              <InformativeCard
+                variant="minimal"
+                heroName={heroItem.name}
+                image={heroItem.thumbnail}
+                description={heroItem.description}
+                key={heroItem.id}
+              />
+            ))}
         </Styled.InfoHeroCardWrapper>
       </Styled.Banner>
       <Footer />

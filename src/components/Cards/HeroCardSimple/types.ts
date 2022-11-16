@@ -6,6 +6,7 @@ export type HeroCardSimpleProps = {
   isFavorite?: boolean;
   onFav?: (heroData: HeroData) => void;
   onFavRemove?: (id: number) => void;
+  onPrefetchData?: () => void;
 };
 
 type HeroData = {

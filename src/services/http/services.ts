@@ -1,3 +1,4 @@
+import { characterByIdMapper } from './../mappers/characterById/index';
 import {
   GetCharacterbyIdResponse,
   GetCharacterComicsProps,
@@ -6,7 +7,7 @@ import {
 } from './types';
 import { api } from './api';
 
-import { characterMapper } from '../mappers/character';
+import { charactersMapper } from '../mappers/character';
 
 const BASE_PATH = 'characters';
 const LIMIT_CHARACTERS = 8;
@@ -20,7 +21,7 @@ const getCharacters = async ({ offset }: { offset: number }) => {
     },
   });
 
-  return characterMapper.toDomain(response.data);
+  return charactersMapper.toDomain(response.data);
 };
 
 const getSearchCharacters = async (heroName: string) => {
@@ -30,7 +31,7 @@ const getSearchCharacters = async (heroName: string) => {
     },
   });
 
-  return characterMapper.toDomain(response.data);
+  return charactersMapper.toDomain(response.data);
 };
 
 const getCharacterById = async (heroId: string) => {
@@ -38,7 +39,7 @@ const getCharacterById = async (heroId: string) => {
     `${BASE_PATH}/${heroId}`
   );
 
-  return response.data;
+  return characterByIdMapper.toDomain(response.data);
 };
 
 const getCharacterComics = async ({

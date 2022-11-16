@@ -12,6 +12,7 @@ const HeroCardSimple = ({
   onFav,
   heroId,
   onFavRemove,
+  onPrefetchData,
 }: HeroCardSimpleProps) => {
   const navigate = useNavigate();
   const onClick = useCallback(() => {
@@ -31,7 +32,10 @@ const HeroCardSimple = ({
   }, [description, heroId, heroName, onFav, onFavRemove, isFavorite, image]);
 
   return (
-    <Styled.Wrapper onClick={() => navigate(`/details/${heroId}`)}>
+    <Styled.Wrapper
+      onMouseEnter={() => !!onPrefetchData && onPrefetchData()}
+      onClick={() => navigate(`/details/${heroId}`)}
+    >
       <Styled.ImageWrapper>
         <img src={image} alt="" />
       </Styled.ImageWrapper>

@@ -11,12 +11,13 @@ import { useHomeScreen } from './useHomeScreen';
 export const Home = () => {
   const {
     characters,
-    addFavorites,
-    removeFavorites,
+    addFavorite,
+    removeFavorite,
     isFavoriteHero,
     searchResult,
     handleChangeSearchCharacter,
     characterName,
+    prefetchDetails,
   } = useHomeScreen();
 
   return (
@@ -47,9 +48,10 @@ export const Home = () => {
                 heroName={hero.name}
                 description={hero.description}
                 image={hero.thumbnail}
-                onFav={hero => addFavorites(hero)}
-                onFavRemove={removeFavorites}
+                onFav={hero => addFavorite(hero)}
+                onFavRemove={removeFavorite}
                 isFavorite={isFavoriteHero(hero.id)}
+                onPrefetchData={() => prefetchDetails(String(hero.id))}
               />
             ))}
           </Styled.HeroList>
@@ -62,9 +64,10 @@ export const Home = () => {
                 heroName={hero.name}
                 description={hero.description}
                 image={hero.thumbnail}
-                onFav={hero => addFavorites(hero)}
-                onFavRemove={removeFavorites}
+                onFav={hero => addFavorite(hero)}
+                onFavRemove={removeFavorite}
                 isFavorite={isFavoriteHero(hero.id)}
+                onPrefetchData={() => prefetchDetails(String(hero.id))}
               />
             ))}
           </Styled.HeroList>

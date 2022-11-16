@@ -24,6 +24,8 @@ import {
 } from 'store/search/selectors';
 
 import { useDebounce } from 'hooks';
+import { queryClient } from 'services/http/queryClient';
+import { charactersSrvices } from 'services/http/services';
 
 export const useHomeScreen = () => {
   const characterName = useSearchHero(characterNameSelector);
@@ -95,6 +97,13 @@ export const useHomeScreen = () => {
     [favorites]
   );
 
+  const prefetchDetails = useCallback(async (characterId: string) => {
+    await queryClient.prefetchQuery(
+      ['characterById', { characterId }],
+      async () => await charactersSrvices.getCharacterById(characterId)
+    );
+  }, []);
+
   return {
     characters,
     addFavorite,
@@ -103,5 +112,6 @@ export const useHomeScreen = () => {
     handleChangeSearchCharacter,
     searchResult,
     characterName,
+    prefetchDetails,
   };
 };

@@ -1,10 +1,9 @@
-import { GetCharactersResponse } from 'services/http/types';
+import { GetCharacterbyIdResponse } from './../../http/types/index';
 import { ReturnToDomain } from './types';
-
-class CharacterMapper {
-  public toDomain(percistenceObject: GetCharactersResponse): ReturnToDomain {
+class CharacterByIdMapper {
+  toDomain(percistenceObject: GetCharacterbyIdResponse): ReturnToDomain {
     return {
-      characters: percistenceObject.data.results.map(character => ({
+      character: percistenceObject.data.results.map(character => ({
         ...character,
         thumbnail: `${character.thumbnail.path}.${character.thumbnail.extension}`,
       })),
@@ -18,4 +17,4 @@ class CharacterMapper {
   }
 }
 
-export const charactersMapper = new CharacterMapper();
+export const characterByIdMapper = new CharacterByIdMapper();
